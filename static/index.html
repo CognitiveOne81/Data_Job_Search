@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Facebook Marketplace Mac Dashboard</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <main class="dashboard">
+      <h1>Facebook Marketplace Search Dashboard</h1>
+      <p class="subtitle">Showing the first 10 items for your search.</p>
+
+      <form id="search-form" class="search-row">
+        <input id="query" name="query" type="text" value="mac" aria-label="Search term" />
+        <button type="submit">Search</button>
+      </form>
+
+      <section>
+        <h2 id="results-heading">Results</h2>
+        <ul id="results" class="results-list"></ul>
+      </section>
+    </main>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
