@@ -1,0 +1,14 @@
+[
+  {"name":"MacBook Pro 14\" M2 Pro (2023)","price":"$1,250","description":"Like new Apple laptop"},
+  {"name":"MacBook Air M1 13\"","price":"$650","description":"Great battery life"},
+  {"name":"iMac 24\" Apple Silicon","price":"$900","description":"Blue model, keyboard included"},
+  {"name":"Mac Mini M2 256GB","price":"$420","description":"Desktop only"},
+  {"name":"MacBook Pro 16\" Intel i9","price":"$850","description":"Older but powerful"},
+  {"name":"Apple Magic Keyboard for Mac","price":"$65","description":"Wireless keyboard"},
+  {"name":"Mac Studio M1 Max","price":"$1,450","description":"Includes power cable"},
+  {"name":"MacBook Air 15\" M2","price":"$980","description":"Space gray"},
+  {"name":"iMac 27\" 5K (Intel)","price":"$700","description":"Retina display"},
+  {"name":"Mac Pro (2019) Tower","price":"$2,100","description":"Base config"},
+  {"name":"MacBook Pro 13\" M1","price":"$700","description":"Excellent condition"},
+  {"name":"Mac Accessories Bundle","price":"$120","description":"Mouse, keyboard, trackpad"}
+]
