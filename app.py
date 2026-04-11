@@ -11,6 +11,8 @@ from marketplace_service import MarketplaceService
 
 BASE_DIR = Path(__file__).parent
 STATIC_DIR = BASE_DIR / "static"
+DEFAULT_ZIP_CODE = "32246"
+DEFAULT_RADIUS_MILES = 30
 
 
 class DashboardHandler(BaseHTTPRequestHandler):
@@ -35,12 +37,18 @@ class DashboardHandler(BaseHTTPRequestHandler):
         self.send_error(HTTPStatus.NOT_FOUND, "Not found")
 
     def _send_marketplace_data(self, query_string: str) -> None:
-        query = parse_qs(query_string).get("query", ["mac"])[0].strip() or "mac"
-        data = self.service.search(query=query, limit=10)
+        params = parse_qs(query_string)
+        query = params.get("query", ["mac"])[0].strip() or "mac"
+        zip_code = params.get("zip", [DEFAULT_ZIP_CODE])[0].strip() or DEFAULT_ZIP_CODE
+        radius_miles = float(params.get("radius", [str(DEFAULT_RADIUS_MILES)])[0])
+
+        data = self.service.search(query=query, limit=10, max_radius_miles=radius_miles)
         payload = {
             "query": query,
             "count": len(data),
             "source": "facebook_marketplace_sample",
+            "zip": zip_code,
+            "radius_miles": radius_miles,
             "items": data,
         }
         body = json.dumps(payload).encode("utf-8")

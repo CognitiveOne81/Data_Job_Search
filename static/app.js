@@ -3,8 +3,11 @@ const form = document.getElementById("search-form");
 const queryInput = document.getElementById("query");
 const heading = document.getElementById("results-heading");
 
-function renderItems(query, items) {
-  heading.textContent = `First ${items.length} results for "${query}"`;
+const DEFAULT_ZIP = "32246";
+const DEFAULT_RADIUS = 30;
+
+function renderItems(query, zip, radius, items) {
+  heading.textContent = `First ${items.length} results for "${query}" within ${radius} miles of ${zip}`;
   results.innerHTML = "";
 
   if (!items.length) {
@@ -17,13 +20,16 @@ function renderItems(query, items) {
   items.forEach((item) => {
     const li = document.createElement("li");
 
-    const name = document.createElement("span");
+    const name = document.createElement("a");
     name.className = "item-name";
+    name.href = item.listing_url;
+    name.target = "_blank";
+    name.rel = "noopener noreferrer";
     name.textContent = item.name;
 
     const price = document.createElement("span");
     price.className = "item-price";
-    price.textContent = item.price;
+    price.textContent = `${item.price} • ${item.distance_miles} miles away`;
 
     li.appendChild(name);
     li.appendChild(price);
@@ -32,9 +38,11 @@ function renderItems(query, items) {
 }
 
 async function loadItems(query) {
-  const response = await fetch(`/api/marketplace?query=${encodeURIComponent(query)}`);
+  const response = await fetch(
+    `/api/marketplace?query=${encodeURIComponent(query)}&zip=${encodeURIComponent(DEFAULT_ZIP)}&radius=${DEFAULT_RADIUS}`,
+  );
   const data = await response.json();
-  renderItems(data.query, data.items);
+  renderItems(data.query, data.zip, data.radius_miles, data.items);
 }
 
 form.addEventListener("submit", async (event) => {
